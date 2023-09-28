@@ -5,6 +5,9 @@
     <string name="city_desc">Sunny</string>
     <string name="no_connection">No network available</string>
     <string name="title_activity_favorite">FavoriteActivity</string>
+    <string name="search_city">Ajouter une ville</string>
+    <string name="confirm_button">Ok</string>
+    <string name="cancel_button">Annuler</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

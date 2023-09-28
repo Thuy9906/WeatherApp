@@ -1,4 +1,4 @@
-package com.thuy.weatherapp;
+package com.thuy.weatherapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +14,9 @@ import android.widget.TextView;
 
 import android.os.Bundle;
 import android.widget.Toast;
+
+import com.thuy.weatherapp.R;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,44 +39,31 @@ public class MainActivity extends AppCompatActivity {
         mEditText = findViewById(R.id.edit_text);
         mButton = findViewById(R.id.button_1);
         mButton.setOnClickListener(onClickListener);
-        //mButton.setOnClickListener(v -> Log.d("Thuy", "Bouton cliqué"));
-        /**Toast.makeText(this, mTextViewCityName.getText().toString(), Toast.LENGTH_SHORT).show();
-         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-         if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
-         Log.d("Thuy", "Oui je suis connecté");
-         } else {
-         Log.d("Thuy", "Non j'ai rien");
-         findViewById(R.id.linear_layout_main).setVisibility(View.INVISIBLE);
-         findViewById(R.id.text_view_no_connection).setVisibility(View.VISIBLE);
-         }*/
+        Toast.makeText(this, mTextViewCityName.getText().toString(), Toast.LENGTH_SHORT).show();
+
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
+            Log.d("Thuy", "Oui je suis connecté");
+        } else {
+            Log.d("Thuy", "Non j'ai rien");
+            findViewById(R.id.linear_layout_main).setVisibility(View.INVISIBLE);
+            findViewById(R.id.text_view_no_connection).setVisibility(View.VISIBLE);
+        }
     }
 
-    //public void onClickButton(View view){
-    //    Boolean isButton1 = view==findViewById(R.id.button_1);
-    //    String msg = isButton1 ? "Clic sur bouton 1" : "Clic sur bouton 3";
-    //    Log.d("Thuy", "Bouton 1 cliqué ? " + isButton1);
-    //    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-    //}
-
-    //public void OnClickListener(View view){
-    //    Log.d("Thuy", "Bouton cliqué");
-    //    Toast.makeText(this, "Clic sur bouton 2", Toast.LENGTH_SHORT).show();
-    //}
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 // actions quand notre bouton est cliqué
-
             Intent intent = new Intent(mContext, FavoriteActivity.class);
             intent.putExtra("message", mEditText.getText().toString());
             startActivity(intent);
-            //Log.d("Thuy", "Clic sur bouton 2");
         }
     };
 
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d("TAG", "MainActivity: onDestroy()");
-    }
+//    public void onDestroy() {
+//        super.onDestroy();
+//        Log.d("TAG", "MainActivity: onDestroy()");
+//    }
 }
