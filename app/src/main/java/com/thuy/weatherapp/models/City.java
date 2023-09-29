@@ -16,6 +16,7 @@ public class City {
     public double mLongitude;
     public int mWeatherResIconWhite;
     public int mWeatherResIconGrey;
+    public String mStringJson;
 
 
     public City(String name, String description, String temperature, int weatherIcon) {
@@ -26,6 +27,7 @@ public class City {
     }
 
     public City(String stringJson) throws JSONException {
+        mStringJson = stringJson;
         JSONObject json = new JSONObject(stringJson);
 
         JSONObject details = json.getJSONArray("weather").getJSONObject(0);

@@ -2,16 +2,25 @@ package com.thuy.weatherapp.utils;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.thuy.weatherapp.R;
+import com.thuy.weatherapp.models.City;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Util {
     public static final String KEY_MESSAGE = "key_message";
+    private static final String PREFS_NAME = "pref_file";
+    private static final String PREFS_FAVORITE_CITIES = "pref_favorite_cities";
 
     public static boolean isActiveNetwork(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -146,5 +155,33 @@ public class Util {
         return "";
     }
 
+    public static void saveFavouriteCities(Context context, ArrayList<City> cities) {
+        JSONArray jsonArrayCities = new JSONArray();
+        for (int i = 0; i < cities.size(); i++) {
+            jsonArrayCities.put(cities.get(i).mStringJson);
+        }
+
+        SharedPreferences preferences = context.getSharedPreferences(Util.PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(Util.PREFS_FAVORITE_CITIES, jsonArrayCities.toString());
+        editor.apply();
+    }
+
+    public static ArrayList<City> initFavoriteCities(Context context) {
+        ArrayList<City> cities = new ArrayList<>();
+        SharedPreferences preferences = context.getSharedPreferences(Util.PREFS_NAME, Context.MODE_PRIVATE);
+
+        try {
+            JSONArray jsonArray = new JSONArray(preferences.getString(Util.PREFS_FAVORITE_CITIES, ""));
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObjectCity = new JSONObject(jsonArray.getString(i));
+                City city = new City(jsonObjectCity.toString());
+                cities.add(city);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return cities;
+    }
 
 }

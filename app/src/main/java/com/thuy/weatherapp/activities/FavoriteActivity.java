@@ -1,5 +1,8 @@
 package com.thuy.weatherapp.activities;
 
+import static com.thuy.weatherapp.utils.Util.initFavoriteCities;
+import static com.thuy.weatherapp.utils.Util.saveFavouriteCities;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -68,7 +71,8 @@ public class FavoriteActivity extends AppCompatActivity {
         String strMessage = extras.getString("message");
         binding.textViewFromExtra.setText(strMessage);
 
-        mCities = new ArrayList<>();
+        mContext = this;
+        mCities = initFavoriteCities(mContext);
 //        City city1 = new City("Montréal", "Légères pluies", "22°C", R.drawable.weather_rainy_grey);
 //        City city2 = new City("New York", "Ensoleillé", "22°C", R.drawable.weather_sunny_grey);
 //        City city3 = new City("Paris", "Nuageux", "24°C", R.drawable.weather_foggy_grey);
@@ -78,8 +82,6 @@ public class FavoriteActivity extends AppCompatActivity {
 //        mCities.add(city3);
 //        mCities.add(city4);
 
-        mContext = this;
-
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerViewCities = binding.included.recyclerViewCities;
         mRecyclerViewCities.setLayoutManager(layoutManager);
@@ -88,7 +90,7 @@ public class FavoriteActivity extends AppCompatActivity {
     }
 
     public void onClickSearch(View view) {
-        Log.d("TAG", "search");
+//        Log.d("TAG", "search");
         final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setMessage(R.string.search_city);
         View v = LayoutInflater.from(mContext).inflate(R.layout.dialog_add_favorite, null);
@@ -100,7 +102,8 @@ public class FavoriteActivity extends AppCompatActivity {
 
                 retrieveCityJsonFromApiRequest(editTextCity.getText().toString());
 
-                Log.d("TAG", "confirmer");
+
+                Log.d("TAG", "onClickSearch confirmé");
 
             }
         });
@@ -146,6 +149,7 @@ public class FavoriteActivity extends AppCompatActivity {
         }
         mCities.add(city);
         mAdapter.notifyDataSetChanged();
+        saveFavouriteCities(mContext, mCities);
     }
 
 //    public void onDestroy() {

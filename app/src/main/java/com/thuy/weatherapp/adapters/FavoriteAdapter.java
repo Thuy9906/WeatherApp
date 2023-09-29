@@ -1,5 +1,7 @@
 package com.thuy.weatherapp.adapters;
 
+import static com.thuy.weatherapp.utils.Util.saveFavouriteCities;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
@@ -83,6 +85,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
                     mCities.remove(mCity);
                     //mCities.add(city);
                     notifyDataSetChanged();
+                    saveFavouriteCities(mContext, mCities);
                 }
             });
             builder.setNegativeButton(android.R.string.cancel, null);
