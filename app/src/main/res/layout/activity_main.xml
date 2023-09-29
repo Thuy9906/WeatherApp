@@ -46,6 +46,7 @@
             android:background="@color/orange_500">
 
             <ImageView
+                android:id="@+id/image_view_city_desc"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/weather_sunny_white" />
