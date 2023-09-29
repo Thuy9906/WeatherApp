@@ -100,7 +100,7 @@ public class FavoriteActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                retrieveCityJsonFromApiRequest(editTextCity.getText().toString());
+//                retrieveCityJsonFromApiRequest(editTextCity.getText().toString());
 
 
                 Log.d("TAG", "onClickSearch confirmé");

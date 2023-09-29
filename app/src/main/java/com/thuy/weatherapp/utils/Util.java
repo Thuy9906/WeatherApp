@@ -21,6 +21,7 @@ public class Util {
     public static final String KEY_MESSAGE = "key_message";
     private static final String PREFS_NAME = "pref_file";
     private static final String PREFS_FAVORITE_CITIES = "pref_favorite_cities";
+    public static final int REQUEST_CODE = 3;
 
     public static boolean isActiveNetwork(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
